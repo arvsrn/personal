@@ -32,7 +32,7 @@
     <div class="flex flex-row gap-2 w-72 mt-2.5">
         <button class="
             select-none h-[31px] w-fit bg-black rounded-full pl-4 pr-3.5 border border-black text-xs text-white flex flex-row items-center justify-center gap-1 leading-[31px]
-            shadow-[0px_41px_12px_0_rgba(0,0,0,0),0px_26px_11px_0_rgba(0,0,0,0.03),0px_15px_9px_0_rgba(0,0,0,0.1),0px_7px_7px_0_rgba(0,0,0,0.17),0px_2px_4px_0_rgba(0,0,0,0.2),inset_0px_-4px_4px_0_rgba(255,255,255,0.10),inset_0px_4px_4px_0_rgba(255,255,255,0.15)]
+            shadow-[0px_41px_12px_0_rgba(0,0,0,0),0px_26px_11px_0_rgba(0,0,0,0.03),0px_15px_9px_0_rgba(0,0,0,0.1),0px_7px_7px_0_rgba(0,0,0,0.17),0px_2px_4px_0_rgba(0,0,0,0.2),inset_0px_-4px_4px_0_rgba(255,255,255,0.15),inset_0px_4px_4px_0_rgba(255,255,255,0.25)]
         ">
             Available for work
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
