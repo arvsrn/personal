@@ -6,10 +6,10 @@
         destroy?: () => void
     } => {
         if (parameters.italic)
-            node.classList.add('italic');
+            node.classList.add('_italic');
         
         if (parameters.code)
-            node.classList.add('code');
+            node.classList.add('_code');
         
         return {
             destroy() {}
@@ -33,7 +33,7 @@
             <p class="{block.type} text-[14.5px] leading-6 text mt-2">
                 {#each block[block.type].rich_text as content}
                     {#if content.text.link}
-                        <a href="{content.text.link}" use:annotate={ content.annotations }>{content.text.content}</a>
+                        <a href="{content.text.link.url}" use:annotate={ content.annotations }>{content.text.content}</a>
                     {:else}
                         <span use:annotate={ content.annotations }>{content.text.content}</span>
                     {/if}
@@ -42,7 +42,7 @@
         {:else if block.type === 'image'}
             <div class="max-w-full h-[743px] flex-none overflow-x-scroll overflow-y-hidden my-16">
                 <div class="w-[1057px] h-[743px] flex-none">
-                    <img draggable="false" class="select-none" src="{block.image.file.url}" alt="">
+                    <img draggable="false" style:image-rendering="pixelated" class="select-none" src="{block.image.file.url}" alt="">
                 </div>
             </div>
         {/if}
@@ -72,12 +72,13 @@
         margin-bottom: 8px;
     }
 
-    .italic {
+    ._italic {
         font-family: 'IBM Plex Serif';
+        font-style: italic;
         font-size: 16.25px;
     }
 
-    .code {
+    ._code {
         font-family: Menlo;
         font-size: 12px;
         color: #FF2F00;
