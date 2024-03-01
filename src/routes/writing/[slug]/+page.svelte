@@ -1,5 +1,20 @@
 <script lang="ts">
     export let data: any;
+
+    const annotate = (node: HTMLElement, parameters: any): {
+        update?: (parameters: any) => void,
+        destroy?: () => void
+    } => {
+        if (parameters.italic)
+            node.classList.add('italic');
+        
+        if (parameters.code)
+            node.classList.add('code');
+        
+        return {
+            destroy() {}
+        }
+    }
 </script>
 
 <main class="w-screen h-screen overflow-scroll flex flex-col items-center py-48">
@@ -11,10 +26,26 @@
         </a>
     </p>
 
-    <p class="text-[13px] leading-6 text mb-6 text-[rgba(0,0,0,0.75)]">{data.properties.description}</p>
+    <p class="text-[14.5px] leading-6 text mb-6 text-[rgba(0,0,0,0.75)]">{data.properties.description}</p>
 
     {#each data.blocks.results as block}
-        <p class="text-[13px] leading-6 text mt-2">{block.paragraph.rich_text[0].text.content}</p>
+        {#if ['paragraph', 'heading_3'].includes(block.type)}
+            <p class="{block.type} text-[14.5px] leading-6 text mt-2">
+                {#each block[block.type].rich_text as content}
+                    {#if content.text.link}
+                        <a href="{content.text.link}" use:annotate={ content.annotations }>{content.text.content}</a>
+                    {:else}
+                        <span use:annotate={ content.annotations }>{content.text.content}</span>
+                    {/if}
+                {/each}
+            </p>
+        {:else if block.type === 'image'}
+            <div class="max-w-full h-[743px] flex-none overflow-x-scroll overflow-y-hidden my-16">
+                <div class="w-[1057px] h-[743px] flex-none">
+                    <img draggable="false" class="select-none" src="{block.image.file.url}" alt="">
+                </div>
+            </div>
+        {/if}
     {/each}
 </main>
 
@@ -31,5 +62,38 @@
         p.text {
             width: 70vw;
         }
+    }
+
+    .paragraph {}
+
+    .heading_3 {
+        font-size: 16px;
+        margin-top: 32px;
+        margin-bottom: 8px;
+    }
+
+    .italic {
+        font-family: 'IBM Plex Serif';
+        font-size: 16.25px;
+    }
+
+    .code {
+        font-family: Menlo;
+        font-size: 12px;
+        color: #FF2F00;
+        background: rgba(255,47,0,0.25);
+        border-radius: 4px;
+        padding: 2px 4px;
+    }
+
+    a {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-decoration-color: rgba(0,0,0,0.5);
+        color: rgba(0,0,0,0.75);
+    }
+
+    .no-scroll::-webkit-scrollbar {
+        display: none;
     }
 </style>

@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ params }: any) => {
         // @ts-ignore
         title: page.properties.Name.title[0].plain_text,
         // @ts-ignore
-        description: page.properties.description.rich_text[0].plain_text,
+        description: page.properties.description?.rich_text[0]?.plain_text || '',
         id: params.slug
     }; 
 
