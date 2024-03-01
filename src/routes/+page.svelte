@@ -84,7 +84,7 @@
             {/each}
         </div>
 
-        <div class="size-fit flex flex-col gap-16">
+        <div class="size-fit flex flex-col gap-16 px-4">
             {#each images as image}
                 <a href={image.link} class="size-fit relative">
                     <img src={image.url} alt="" class="rounded-xl border select-none" draggable="false">
