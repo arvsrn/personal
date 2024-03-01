@@ -1,20 +1,5 @@
 <script lang="ts">
     export let data: any;
-
-    const annotate = (node: HTMLElement, parameters: any): {
-        update?: (parameters: any) => void,
-        destroy?: () => void
-    } => {
-        if (parameters.italic)
-            node.classList.add('_italic');
-        
-        if (parameters.code)
-            node.classList.add('_code');
-        
-        return {
-            destroy() {}
-        }
-    }
 </script>
 
 <main class="w-screen h-screen overflow-scroll flex flex-col items-center py-48">
@@ -33,9 +18,9 @@
             <p class="{block.type} text-[14.5px] leading-6 text mt-2">
                 {#each block[block.type].rich_text as content}
                     {#if content.text.link}
-                        <a href="{content.text.link.url}" use:annotate={ content.annotations }>{content.text.content}</a>
+                        <a href="{content.text.link.url}" class="{content.annotations.italic ? '_italic' : ''} {content.annotations.code ? '_code' : ''}">{content.text.content}</a>
                     {:else}
-                        <span use:annotate={ content.annotations }>{content.text.content}</span>
+                        <span class="{content.annotations.italic ? '_italic' : ''} {content.annotations.code ? '_code' : ''}">{content.text.content}</span>
                     {/if}
                 {/each}
             </p>
@@ -75,7 +60,7 @@
     ._italic {
         font-family: 'IBM Plex Serif';
         font-style: italic;
-        font-size: 16.25px;
+        font-size: 14px;
     }
 
     ._code {
