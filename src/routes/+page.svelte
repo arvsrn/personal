@@ -33,9 +33,15 @@
     let images: Work[] = [
         {
             url: '/ss1.png',
-            link: 'https://www.intent.app',
-            type: 'Link',
+            link: null,
+            type: 'Image',
             title: 'Intent',
+        },
+        {
+            url: '/ss3.png',
+            link: null,
+            type: 'Image',
+            title: 'Daywise',
         },
         {
             url: '/ss2.png',
@@ -48,10 +54,11 @@
 
 <main>
     <div class="w-screen h-[50vh] flex flex-col items-center justify-end gap-2.5">
-        <p class="text-[14.5px] leading-6 w-80">I'm Aarav, a freelance full-stack web developer & visual designer from India.</p>
-        <p class="text-[14.5px] leading-6 w-80">I'm well-versed with <span class="bg-[rgba(255,47,0,0.25)]">Svelte, React, Tailwind, Supabase, Rust, JS/TS, etc</span>. I practice <span class="bg-[rgba(12,140,233,0.25)]">interface, web and brand design</span>.</p>
+        <p class="text-[14.5px] leading-6 w-[324px]">I'm Aarav, a freelance full-stack web developer & visual designer from India.</p>
+        <p class="text-[14.5px] leading-6 w-[324px]">Proficient with <span class="bg-[rgba(255,47,0,0.25)]">Svelte, React, Tailwind, Supabase, Rust, JS/TS,</span> and <span class="bg-[rgba(12,140,233,0.25)]">interface, web and brand design</span>.</p>
+        <p class="text-[14.5px] leading-6 w-[324px]">Driven by a passion to build meaningful and beautiful software.</p>
         
-        <div class="flex flex-row gap-2 w-80 mt-2.5">
+        <div class="flex flex-row gap-2 w-[324px] mt-2.5">
             <button class="
                 select-none h-[31px] w-fit bg-black rounded-full pl-4 pr-3.5 border border-black text-xs text-white flex flex-row items-center justify-center gap-1 leading-[31px]
                 shadow-[0px_41px_12px_0_rgba(0,0,0,0),0px_26px_11px_0_rgba(0,0,0,0.03),0px_15px_9px_0_rgba(0,0,0,0.1),0px_7px_7px_0_rgba(0,0,0,0.17),0px_2px_4px_0_rgba(0,0,0,0.2),inset_0px_-4px_4px_0_rgba(255,255,255,0.15),inset_0px_4px_4px_0_rgba(255,255,255,0.25)]
@@ -68,7 +75,7 @@
     </div>
     
     <div class="w-screen h-fit flex flex-col items-center justify-center py-32 gap-32">
-        <div class="w-80 h-fit flex flex-col gap-5">
+        <div class="w-[324px] h-fit flex flex-col gap-5">
             <p class="text-[14.5px] leading-6 w-full text-black/75 select-none">Articles</p>
     
             {#each data.pages_data as page}
@@ -96,7 +103,7 @@
             {/each}
         </div>
     
-        <div class="w-80 h-fit flex flex-col gap-0">
+        <div class="w-[324px] h-fit flex flex-col gap-0">
             <div class="w-full flex flex-row">
                 <p class="text-[14.5px] leading-6 w-full text-black/75 select-none">Version 17 · 2024</p>
                 <p class="text-[14.5px] leading-6 w-fit text-black/75 select-none flex-none">{time.getHours()}.{time.getMinutes()} local time</p>
@@ -105,8 +112,8 @@
     </div>
 </main>
 
-<div class="fixed bottom-4 left-1/2 size-[31px] rounded-full bg-white/5 backdrop-blur-sm border border-black/10 flex items-center justify-center">
-    <svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2v10.5m0 0L11 9m-3.5 3.5L4 9" stroke="white"/></svg>
+<div class="fixed bottom-4 left-1/2 size-[31px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0px_41px_12px_0_rgba(0,0,0,0),0px_26px_11px_0_rgba(0,0,0,0.03),0px_15px_9px_0_rgba(0,0,0,0.1),0px_7px_7px_0_rgba(0,0,0,0.17),0px_2px_4px_0_rgba(0,0,0,0.2)]">
+    <svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2v10.5m0 0L11 9m-3.5 3.5L4 9" stroke="black"/></svg>
 </div>
 
 <style>
