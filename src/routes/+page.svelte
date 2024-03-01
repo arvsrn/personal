@@ -87,7 +87,7 @@
         <div class="size-fit flex flex-col gap-16 px-4">
             {#each images as image}
                 <a href={image.link} class="size-fit relative">
-                    <img src={image.url} alt="" class="rounded-xl border select-none" draggable="false">
+                    <img src={image.url} style:image-rendering="pixelated" alt="" class="rounded-xl border select-none" draggable="false">
 
                     <div class="w-fit text-xs text-white px-2.5 flex flex-row items-center justify-center h-7 absolute bottom-1.5 right-1.5 rounded-md bg-white/10 border border-white/10 select-none">
                         {image.title} · {image.type}
