@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital@1&display=swap');
-
 @font-face {
     font-family: Fakt;
-    src: url('./FaktPro-Normal.ttf');
+    src: url(./FaktProNormal.otf);
 }
 
 @font-face {
-    font-family: Menlo;
-    src: url('./Menlo-Regular.ttf');
+    font-family: Alpina;
+    src: url(./GT-Alpina-Standard-Regular-Italic.otf);
 }
 
 * {
@@ -17,13 +15,15 @@
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-
-    font-family: Fakt;
 }
 
 body {
-    background-color: white;
-    background-image: url('./marble.png');
+    background: white;
+    font-family: Fakt;
+}
+
+.italic {
+    font-family: Alpina;    
 }
 
 ::selection {
