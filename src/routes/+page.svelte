@@ -1,13 +1,11 @@
-<script>
+<script lang="ts">
+    import { fade } from "svelte/transition";
     import Image from "./Image.svelte";
     import Music from "./Music.svelte";
 
     const date = new Date();
-    let localTime = date.getTime();
-    let localOffset = date.getTimezoneOffset() * 60_000;
-
-    let utc = localTime + localOffset;
-    let time = new Date(utc + 19_800_000);
+    let time: Date;
+    let copied = false;
 
     const setTime = () => {
         const date = new Date();
@@ -20,121 +18,128 @@
         setTimeout(setTime, 60_000);
     };
 
+    const copyEmail = () => {
+        window.navigator.clipboard.writeText('hi@arvsrn.com');
+        copied = true;
+        setTimeout(() => copied = false, 2000);
+    };
+
+    setTime();
     setTimeout(setTime, 60_000);
 </script>
 
-<main class="relative w-screen min-h-screen h-fit overflow-hidden">
-    <svg class="absolute left-1/2 -translate-x-1/2 pointer-events-none -top-[1000px] -z-50" width="3750" height="1950" viewBox="0 0 3750 1950" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.5" filter="url(#filter0_f_2811_2961)">
-            <circle opacity="0.75" cx="1875" cy="975" r="300" fill="#00FF94"/>
-            <circle opacity="0.75" cx="1425" cy="975" r="300" fill="#DBFF00"/>
-            <circle opacity="0.75" cx="2325" cy="975" r="300" fill="#0047FF"/>
-            <circle opacity="0.75" cx="2775" cy="975" r="300" fill="#6100FF"/>
-            <circle opacity="0.75" cx="975" cy="975" r="300" fill="#FF2F00"/>
-        </g>
-        <defs>
-            <filter id="filter0_f_2811_2961" x="0" y="0" width="3750" height="1950" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur stdDeviation="337.5" result="effect1_foregroundBlur_2811_2961"/>
-            </filter>
-        </defs>
-    </svg>
+<main class="relative w-screen min-h-screen h-fit overflow-hidden bg-[#101010]">
+    <div class="py-32 flex flex-col gap-32 items-center justify-center w-full h-fit">
+        <div class="responsive h-fit flex flex-col gap-3">
+            <div class="flex flex-col">
+                <p class="text-sm text-white font-[500]">Aarav Sareen</p>
+                <p class="text-[11px] leading-6 text-white/50 mono">DESIGNER, FULL STACK DEVELOPER</p>
+            </div>
 
-    <svg class="absolute left-1/2 -translate-x-1/2 pointer-events-none -bottom-[1000px] -z-50" width="3750" height="1950" viewBox="0 0 3750 1950" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.5" filter="url(#filter0_f_2811_2961)">
-            <circle opacity="0.75" cx="1875" cy="975" r="300" fill="#00FF94"/>
-            <circle opacity="0.75" cx="1425" cy="975" r="300" fill="#DBFF00"/>
-            <circle opacity="0.75" cx="2325" cy="975" r="300" fill="#0047FF"/>
-            <circle opacity="0.75" cx="2775" cy="975" r="300" fill="#6100FF"/>
-            <circle opacity="0.75" cx="975" cy="975" r="300" fill="#FF2F00"/>
-        </g>
-        <defs>
-            <filter id="filter0_f_2811_2961" x="0" y="0" width="3750" height="1950" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur stdDeviation="337.5" result="effect1_foregroundBlur_2811_2961"/>
-            </filter>
-        </defs>
-    </svg>
+            <p class="text-[13px] leading-[22px] text-white font-[400]">
+                16. Based in India. Currently designing and building interfaces at <a href="https://www.unriddle.ai">Unriddle</a>. Building <a href="https://www.x.com/runicdesign">@runicdesign</a>, a component kit and <span class="text-white/50">████, a project management tool</span> on the side.
+            </p>
 
-    <div class="py-32 flex items-center justify-center w-full h-fit">
-        <div class="responsive h-fit flex flex-col">
-            <Music></Music>
-            <p class="text-lg italic">Aarav Sareen</p>
-            <p class="text-[13px] leading-6 text-black/75">Full-stack developer and website/product designer.</p>
-            <p class="text-[13px] leading-6 text-black mt-3">Dedicated to designing & building memorable and human-centered experiences across brands, websites and products.</p>
+            <div class="flex flex-col">
+                <p class="text-[11px] leading-[18px] text-white/50 mono">
+                    {time.getHours().toString().padStart(2, '0')}:{time.getMinutes().toString().padStart(2, '0')} LOCAL TIME (IST)
+                </p>
+                <p class="text-[11px] leading-[18px] text-white/50 mono">VERSION 20</p>
+            </div>
 
             <div class="flex flex-row gap-2 mt-5">
-                <button class="rounded-full h-8 bg-black border border-black select-none w-fit flex flex-row gap-2 items-center pl-3 pr-3.5 text-white text-xs shadow-[inset_0px_4px_15px_0px_rgba(255,255,255,25%),0px_15px_40px_0px_rgba(0,0,0,20%),0px_10px_20px_0px_rgba(0,0,0,15%),0px_3px_4px_0px_rgba(0,0,0,3%)]">
-                    <div class="rounded-full size-2 bg-[#42D692]"></div>
-                    <span class="translate-y-[1px]">Schedule call</span>  
+                <button on:click={() => window.location.assign('https://x.com/arvsrn')}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.78122 1.99512C2.50934 1.99512 2.25875 2.14226 2.12627 2.37968C1.9938 2.6171 2.00019 2.90763 2.14297 3.139L5.8285 9.111L2.2353 12.7042C1.9424 12.9971 1.9424 13.472 2.23529 13.7649C2.52819 14.0578 3.00306 14.0578 3.29595 13.7649L6.63804 10.4228L8.62583 13.6438C8.76243 13.8651 9.00397 13.9999 9.26407 13.9999H13.2641C13.536 13.9999 13.7865 13.8528 13.919 13.6153C14.0515 13.3779 14.0451 13.0874 13.9023 12.856L10.2015 6.8593L13.7678 3.29303C14.0607 3.00013 14.0607 2.52526 13.7678 2.23237C13.4749 1.93947 13.0001 1.93947 12.7072 2.23237L9.392 5.54752L7.41946 2.35123C7.28286 2.12989 7.04133 1.99512 6.78122 1.99512H2.78122ZM9.68255 12.4999L4.12539 3.49512H6.36275L11.9199 12.4999H9.68255Z" fill="currentColor" fill-opacity="0.5"/>
+                    </svg>                        
+                    Twitter
                 </button>
-                <a href="https://x.com/arvsrn" class="rounded-full h-8 bg-transparent border border-black/25 select-none w-fit flex flex-row gap-2 items-center px-3.5 text-black text-xs">
-                    <span class="translate-y-[1px]">X/Twitter</span>  
-                </a>
+                <button 
+                    on:click={copyEmail}
+                    class:copied={copied}
+                >
+                    {#if copied}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 7L7 10.5L7.63236 9.55146C8.53938 8.19094 9.63793 6.96839 10.8941 5.9216L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                        
+                        Copied
+                    {:else}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C6.89543 2 6 2.89543 6 4V4.5H9C10.3807 4.5 11.5 5.61929 11.5 7V10H12C13.1046 10 14 9.10457 14 8V4C14 2.89543 13.1046 2 12 2H8Z" fill="currentColor" fill-opacity="0.5"/>
+                            <rect x="2" y="6" width="8" height="8" rx="2" fill="currentColor" fill-opacity="0.5"/>
+                        </svg>
+                        Email
+                    {/if}
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="py-32 flex flex-col gap-16 items-center justify-center w-full h-fit">
-        <div class="responsive h-fit flex flex-col">
-            <p class="text-lg italic">Ghosteams</p>
-            <p class="text-[13px] leading-6 text-black/75">Design for a project management platform.</p>
-
-            <div class="w-full flex flex-row gap-3 mt-3">
-                <img class="size-6 rounded-full" src="/Testimonials/Ghosteams.jpg">
-                
-                <div class="w-full flex flex-col">
-                    <p class="text-[13px] leading-6 text-black">Utkarsh Dubey, Founder at Ghosteams</p>
-                    <p class="text-[13px] leading-6 text-black/50">He masterfully understood my vision ⏤ making him an outstanding designer I wholeheartedly recommend.</p>
-                </div>
+        <div class="flex flex-col gap-12">
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot01.png" />
             </div>
-        </div>
-
-        <div class="flex flex-col responsive-gap">
-            <Image src="/Shots/Ghosteams-1.png"></Image>
-            <Image src="/Shots/Ghosteams-2.png"></Image>
-            <Image src="/Shots/Ghosteams-3.png"></Image>
-            <Image src="/Shots/Ghosteams-4.png"></Image>
-        </div>
-    </div>
-
-    <div class="py-32 flex flex-col gap-16 items-center justify-center w-full h-fit">
-        <div class="responsive h-fit flex flex-col">
-            <p class="text-lg italic">Intent</p>
-            <p class="text-[13px] leading-6 text-black/75">An issue tracker app built for teams. Designed & built from scratch (Bun, SvelteKit, Tailwind)</p>
-        </div>
-
-        <Image src="/Shots/Intent-1.png"></Image>
-        <Image src="/Shots/Intent-2.png"></Image>
-        <Image src="/Shots/Intent-3.png"></Image>
-    </div>
-
-    <div class="py-32 flex flex-col gap-16 items-center justify-center w-full h-fit">
-        <div class="responsive h-fit flex flex-col">
-            <p class="text-lg italic">Runic</p>
-            <p class="text-[13px] leading-6 text-black/75">A design system and icon set.</p>
-        </div>
-
-        <Image src="/Shots/Runic-1.png"></Image>
-        <Image src="/Shots/Runic-2.png"></Image>
-        <Image src="/Shots/Runic-3.png"></Image>
-    </div>
-
-    <div class="py-32 flex items-center justify-center w-full h-fit">
-        <div class="responsive h-fit flex flex-col">
-            <p class="text-lg italic">Want to work together?</p>
-            <p class="text-[13px] leading-6 text-black">I design/redesign/build products and websites from scratch.</p>
-
-            <button class="mt-5 rounded-full h-8 bg-black border border-black select-none w-fit flex flex-row gap-2 items-center pl-3 pr-3.5 text-white text-xs shadow-[inset_0px_4px_15px_0px_rgba(255,255,255,25%),0px_15px_40px_0px_rgba(0,0,0,20%),0px_10px_20px_0px_rgba(0,0,0,15%),0px_3px_4px_0px_rgba(0,0,0,3%)]">
-                <div class="rounded-full size-2 bg-[#42D692]"></div>
-                <span class="translate-y-[1px]">Schedule call</span>  
-            </button>
-
-            <div class="responsive flex flex-row mt-5">
-                <p class="text-[13px] leading-6 text-black">{time.getHours()}:{time.getMinutes() < 10 ? '0' : ''}{time.getMinutes()} IST</p>
-                <p class="text-[13px] leading-6 text-black/50 ml-auto">19th Iteration</p>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot02.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Home screen for <a href="https://www.unriddle.ai">Unriddle</a>'s app redesign concept</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot03.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Kanban view screen I designed for <a href="https://www.ghosteams.com">Ghosteams</a>.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot04.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Onboarding flow for <a href="https://www.unriddle.ai">Unriddle</a>'s app redesign concept.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot05.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Empty note screen for <a href="https://www.unriddle.ai">Unriddle</a>'s app redesign concept.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot06.png" />
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot07.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Bento section for an issue tracking tool.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot08.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Dashboard for <a href="https://www.ghosteams.com">Ghosteams</a>.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot09.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Chat with PDF for <a href="https://www.unriddle.ai">Unriddle</a>'s app redesign concept.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot10.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Moodboard app exploration.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot11.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Chat with recording screen for <a href="https://www.unriddle.ai">Unriddle</a>'s app redesign concept.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot12.png" />
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot13.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">Issue details screen for <a href="https://www.ghosteams.com">Ghosteams</a>.</p>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <Image src="/Shots/shot14.png" />
+                <p class="text-[11px] leading-[18px] text-white/50 w-full select-none">1.5px stroke, 16×16px icons for <a href="https://www.x.com/runicdesign">Runic</a>.</p>
             </div>
         </div>
     </div>
@@ -146,22 +151,32 @@
     }
 
     .responsive {
-        width: 400px;
-    }
-
-    .responsive-gap {
-        gap: 64px;
+        width: 440px;
     }
 
     @media only screen and (max-width: 500px) {
         .responsive {
-            width: 80vw;
+            width: 86vw;
         }
     }
 
-    @media only screen and (max-width: 927px) {
-        .responsive-gap {
-            gap: 32px;
-        }
+    a {
+        @apply text-[#70B8FF] font-[500];
+    }
+
+    a:hover {
+        @apply text-[#C2E6FF];
+    }
+
+    button {
+        @apply bg-white/[.025] select-none rounded-full pl-2 pr-2.5 py-0.5 size-fit border-dashed border-white/5 border-[1px] flex flex-row items-center gap-1 text-xs leading-[22px] text-white transition-colors duration-150;
+    }
+
+    button:hover {
+        @apply bg-white/[.05] border-white/[.075];
+    }
+
+    button.copied {
+        @apply pl-1.5 bg-[#22FF991E] border-[#22FF991E] text-[#3DD68C];
     }
 </style>

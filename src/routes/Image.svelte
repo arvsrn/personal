@@ -1,18 +1,20 @@
 <script lang="ts">
     export let src: string;
+    export let light: boolean = false;
     
     let position = [0, 0];
     let hovering = false;
 
-    let zoomFactor = 2;
+    let zoomFactor = 2.5;
+    let padding = 64;
 
     let self: HTMLImageElement;
 
     const onMouseEnter = (event: MouseEvent | TouchEvent) => {
         event.preventDefault();
 
-        const clientX = event.clientX ?? event.touches[0].clientX;
-        const clientY = event.clientY ?? event.touches[0].clientY;
+        const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+        const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
         
         hovering = true;
         position = [clientX, clientY];
@@ -26,19 +28,34 @@
     const onMouseMove = (event: MouseEvent | TouchEvent) => {
         event.preventDefault();
 
-        const clientX = event.clientX ?? event.touches[0].clientX;
-        const clientY = event.clientY ?? event.touches[0].clientY;
+        const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+        const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
         
         if (!self)
             return;
         
         const rect = (event.target as HTMLElement).getBoundingClientRect();
-        const mouseX = clientX - rect.left;
-        const mouseY = clientY - rect.top;
+        const mouseX = (clientX - rect.left);
+        const mouseY = (clientY - rect.top);
+
+        const centerRect = [
+            (rect.width * zoomFactor) - rect.width + 2 * padding,
+            (rect.height * zoomFactor) - rect.height + 2 * padding,
+        ];
+
+        console.log(mouseX, mouseY);
+
+        const maxX = centerRect[0] / 2;
+        const maxY = centerRect[1] / 2;
+
+        const percentage = [
+            mouseX / rect.width,
+            mouseY / rect.height,
+        ];
 
         position = [
-            Math.floor(((rect.width / 2) - mouseX) / 2),
-            Math.floor(((rect.height / 2) - mouseY) / 2),
+            Math.floor((1 - 2 * percentage[0]) * maxX / zoomFactor),
+            Math.floor((1 - 2 * percentage[1]) * maxY / zoomFactor),
         ];
     };
 </script>
@@ -52,7 +69,8 @@
     on:touchend={onMouseLeave} 
     on:touchmove={onMouseMove} 
 
-    class="bg-white responsive relative outline outline-1 outline-black/10 rounded-xl overflow-hidden cursor-move"
+    class="bg-[#101010] responsive relative outline outline-1 outline-white/[.025] rounded-md overflow-hidden cursor-move"
+    class:light={light}
 >
     <img bind:this={self} style:transform="translate({position[0]}px, {position[1]}px)" style:--zoom={zoomFactor} class:zoom={hovering} class="responsive origin-center pointer-events-none absolute" {src} alt="">
 </div>
@@ -67,13 +85,17 @@
     }
 
     .responsive {
-        width: 908px;
-        aspect-ratio: 908 / 644;
+        width: 780px;
+        aspect-ratio: 780 / 507;
     }
 
-    @media only screen and (max-width: 927px) {
+    .light {
+        @apply bg-[#FBFBFB];
+    }
+
+    @media only screen and (max-width: 907px) {
         .responsive {
-            width: 98vw;
+            width: 86vw;
         }
     }
 </style>

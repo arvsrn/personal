@@ -1,11 +1,22 @@
 @font-face {
-    font-family: Fakt;
-    src: url(./FaktProNormal.otf);
+    font-family: Lausanne;
+    font-weight: 500;
+    src: url(./TWKLausanne-500.ttf);
 }
 
 @font-face {
-    font-family: Alpina;
-    src: url(./GT-Alpina-Standard-Regular-Italic.otf);
+    font-family: Lausanne;
+    font-weight: 400;
+    src: url(./TWKLausanne-400.ttf);
+}
+
+@font-face {
+    font-family: Menlo;
+    src: url(./Menlo.ttf);
+}
+
+.mono {
+    font-family: Menlo;
 }
 
 * {
@@ -18,14 +29,29 @@
 }
 
 body {
-    background: white;
-    font-family: Fakt;
-}
-
-.italic {
-    font-family: Alpina;    
+    background: #FFFFFF;
+    font-family: Lausanne;
+    font-weight: 400;
 }
 
 ::selection {
     background: rgba(12, 140, 233, 0.25);
+}
+
+[data-animate] {
+    animation: enter .6s both;
+    -webkit-animation-delay: calc(var(--stagger) * 120ms);
+    animation-delay: calc(var(--stagger) * 120ms);
+}
+
+@keyframes enter { 
+    from {
+        transform: translateY(25px);
+        opacity: 0%;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
 }
