@@ -37,7 +37,7 @@
             </div>
 
             <p class="text-[13px] leading-[22px] text-white font-[400]">
-                16. Based in India. Currently designing and building interfaces at <a href="https://www.unriddle.ai">Unriddle</a>. Building <a href="https://www.x.com/runicdesign">@runicdesign</a>, a component kit and <span class="text-white/50">████, a project management tool</span> on the side.
+                Currently designing and building interfaces at <a href="https://www.unriddle.ai">Unriddle</a>. On the side, building <a href="https://www.x.com/runicdesign">@runicdesign</a>, a component kit and <span class="text-white/50">████, a project management tool</span>.
             </p>
 
             <div class="flex flex-col">
@@ -169,7 +169,7 @@
     }
 
     button {
-        @apply bg-white/[.025] select-none rounded-full pl-2 pr-2.5 py-0.5 size-fit border-dashed border-white/5 border-[1px] flex flex-row items-center gap-1 text-xs leading-[22px] text-white transition-colors duration-150;
+        @apply bg-white/[.025] select-none rounded-full pl-1.5 pr-2.5 py-0.5 size-fit border-dashed border-white/5 border-[1px] flex flex-row items-center gap-1 text-xs leading-[22px] text-white transition-colors duration-150;
     }
 
     button:hover {
@@ -177,6 +177,6 @@
     }
 
     button.copied {
-        @apply pl-1.5 bg-[#22FF991E] border-[#22FF991E] text-[#3DD68C];
+        @apply bg-[#22FF991E] border-[#22FF991E] text-[#3DD68C];
     }
 </style>
